@@ -3,8 +3,11 @@
 const { expect } = require('chai');
 const overrideArgv = require('process-utils/override-argv');
 const isHelpRequest = require('../../../../lib/cli/is-help-request');
+const initialParseArgs = require('../../../../lib/cli/initial-parse-args');
 
 describe('test/unit/lib/cli/is-help-request.test.js', () => {
+  beforeEach(() => initialParseArgs.clear());
+
   it('recognize --help', async () => {
     expect(overrideArgv({ args: ['serverless', '--help'] }, () => isHelpRequest())).to.equal(true);
   });
